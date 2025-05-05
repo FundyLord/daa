@@ -100,7 +100,7 @@ Node extractMin(MinHeap* minHeap) {
     pos[lastNode.vertex] = 0;
     minHeap->heap[0] = lastNode;
     minHeap->size--;
-    minHeapify(minHeap);
+    minHeapify(minHeap, 0);
     return root;
 }
 
@@ -123,9 +123,10 @@ MinHeap* createMinHeap(int capacity) {
     return minHeap;
 }
 
-typedef struct {
+typedef struct AdjListNode {
     int dest;
     int weight;
+    struct AdjListNode* next; // Add next pointer for linked list
 } AdjListNode;
 
 typedef struct {
@@ -133,15 +134,15 @@ typedef struct {
 } AdjList;
 
 typedef struct {
-    int V;
+    int numVertices;
     AdjList* array;
 } Graph;
 
-Graph* createGraph(int V) {
+Graph* createGraph(int numVertices) {
     Graph* graph = (Graph*)malloc(sizeof(Graph));
-    graph->V = V;
-    graph->array = (AdjList*)malloc(V * sizeof(AdjList));
-    for (int i = 0; i < V; ++i)
+    graph->numVertices = numVertices;
+    graph->array = (AdjList*)malloc(numVertices * sizeof(AdjList));
+    for (int i = 0; i < numVertices; ++i)
         graph->array[i].head = NULL;
     return graph;
 }
@@ -167,21 +168,21 @@ void printMST_Heap(int parent[], int key[]) {
 }
 
 void primMST_Heap(Graph* graph) {
-    int V_graph = graph->V;
-    int* parent = (int*)malloc(V_graph * sizeof(int));
-    int* key = (int*)malloc(V_graph * sizeof(int));
-    pos = (int*)malloc(V_graph * sizeof(int));
+    int numVertices = graph->numVertices;
+    int* parent = (int*)malloc(numVertices * sizeof(int));
+    int* key = (int*)malloc(numVertices * sizeof(int));
+    pos = (int*)malloc(numVertices * sizeof(int));
 
-    MinHeap* minHeap = createMinHeap(V_graph);
+    MinHeap* minHeap = createMinHeap(numVertices);
 
-    for (int v = 0; v < V_graph; ++v) {
+    for (int v = 0; v < numVertices; ++v) {
         key[v] = INT_MAX;
         minHeap->heap[v].vertex = v;
         minHeap->heap[v].weight = key[v];
         pos[v] = v;
     }
 
-    minHeap->size = V_graph;
+    minHeap->size = numVertices;
     key[0] = 0;
     decreaseKey(minHeap, 0, key[0]);
 

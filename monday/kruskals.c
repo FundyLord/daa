@@ -188,6 +188,8 @@ int main() {
 // - Sort all edges by weight in increasing order
 // - Use Disjoint Set Union (DSU) to detect cycles
 // - Pick smallest edges that don’t form cycle until V-1 edges selected
+// finds if root value appears twice in the graph (finds cycle)
+// - Union operation merges two sets (vertices) into one
 
 // 3) Time Complexity:
 // Best/Avg/Worst Case: O(E log E) due to sorting edges

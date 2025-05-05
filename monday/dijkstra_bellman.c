@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <stdbool.h>
 
 // ================== Data Structures ===================
 
@@ -8,6 +9,7 @@
 typedef struct AdjListNode {
     int dest;
     int weight;
+    struct AdjListNode* next; // Add next pointer for linked list
 } AdjListNode;
 
 typedef struct AdjList {
@@ -126,7 +128,7 @@ HeapNode extractMin(MinHeap* minHeap) {
     minHeap->pos[lastNode.v] = 0;
 
     --minHeap->size;
-    minHeapify(minHeap);
+    minHeapify(minHeap, 0);
 
     return root;
 }
@@ -335,13 +337,13 @@ int main() {
 
 
 
-Running Dijkstra's Algorithm:
-Vertex	Distance from Source
-0 			0
-1 			6
-2 			4
-3 			5
-4 			2
+// Running Dijkstra's Algorithm:
+// Vertex	Distance from Source
+// 0 			0
+// 1 			6
+// 2 			4
+// 3 			5
+// 4 			2
 
 
 

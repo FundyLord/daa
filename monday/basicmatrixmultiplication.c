@@ -140,6 +140,16 @@ void generateRandomDimensions(int arr[], int size) {
         arr[i] = pow(2, rand() % 6 + 3);
     }
 }
+// void printOptimalParens(int s[][10], int i, int j) {
+//     if (i == j)
+//         printf("A%d", i);
+//     else {
+//         printf("(");
+//         printOptimalParens(s, i, s[i][j]);
+//         printOptimalParens(s, s[i][j] + 1, j);
+//         printf(")");
+//     }
+// }
 
 // Function to print worst-case time complexity
 void printTimeComplexity(int n, const char* method) {

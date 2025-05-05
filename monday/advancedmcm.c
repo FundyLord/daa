@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
-
+#include <limits.h>
 #define MAX_MATRICES 10
 #define MAX_SIZE 128
 
