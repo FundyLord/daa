@@ -84,7 +84,7 @@ void matrixChainOrderTopDown(int p[], int n) {
     printf("Minimum number of multiplications (Top-Down): %d\n", minMult);
     printf("Optimal Parenthesization: ");
     printOptimalParenthesis(splits, 1, n);
-    printf("\n");
+    printf("\n");  
 }
 
 
@@ -102,3 +102,45 @@ int main() {
 
     return 0;
 }
+
+
+// 1) Input:
+// - arr[]: Array of matrix dimensions (size = n)
+//   For matrices M1(p×q), M2(q×r), ..., Mn(r×s), arr = [p, q, r, ..., s]
+// - n: Number of elements in arr = number of matrices + 1
+
+// 2) Algorithm:
+// Bottom-Up DP:
+// - Fill dp[i][j] for all subchains from length 2 to n-1
+// - Try placing parenthesis at all possible k positions
+// Top-Down Memoized Recursion:
+// - Recursive function with memo table
+// - Avoid recomputation using stored values
+
+// 3) Time Complexity:
+// Best/Avg/Worst Case: O(n^3) due to triple nested loops
+// Without memoization: O(2^n) exponential recursion
+
+// 4) Space Complexity:
+// - O(n^2), for DP or memo tables
+// - Additional stack space for recursive calls (top-down)
+
+// 5) Advantages / Disadvantages:
+// Bottom-Up:
+// + Faster constant factors, no recursion overhead
+// + Predictable memory usage
+// - Less intuitive than top-down
+// Top-Down:
+// + Easier to implement and understand
+// + Natural expression of recurrence
+// - Higher memory overhead from recursion stack
+// Both:
+// - Not scalable for large n (>100) due to cubic time
+
+// 6) Recurrence Relation:
+// M(i, j) = min{ M(i,k) + M(k,j) + arr[i]*arr[k]*arr[j] }, for i < k < j
+// Base case: M(i,i) = 0
+
+// 7) Summary (2 lines):
+// Solves matrix chain multiplication problem using dynamic programming.
+// Bottom-up and top-down methods are both polynomial but memory intensive.
